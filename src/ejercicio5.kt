@@ -16,47 +16,59 @@ class Tiempo (private var hora:Int) {
     }
 
 
-    fun setHora(hora: Int) {
-        if (hora > 24) {
+    fun setHora(hora: String) {
+        if (hora.toInt() > 24) {
             println("La hora no puede ser mayor a 24")
             print("Introduce la hora: ")
-            this.setHora(readln().toInt())
+            this.setHora(readln())
         }
     }
 
-    fun setMinutos(minutos: Int) {
-        this.minutos = minutos
-        do {
-           this.minutos -= 60
-           this.hora += 1
-        } while (this.minutos >= 60)
+    fun setMinutos(minutos: String) {
+        try {
+            this.minutos = minutos.toInt()
+            while (this.minutos >= 60) {
+               this.minutos -= 60
+               this.hora += 1
+            }
+        } catch (e:Exception) {
+            println("Error los segundos introducidos no son válidos.")
+            print("Introduce los segundos: ")
+            this.setMinutos(readln())
+        }
     }
 
-    fun setSegundos(segundos: Int) {
-        this.segundos = segundos
-        do {
-            this.segundos -= 60
-            this.minutos += 1
-        } while (this.segundos >= 60)
+    fun setSegundos(segundos: String) {
+        try {
+            this.segundos = segundos.toInt()
+            while (this.segundos >= 60) {
+                this.segundos -= 60
+                this.minutos += 1
+            }
+        } catch (e:Exception) {
+            println("Error los segundos introducidos no son válidos.")
+            print("Introduce los segundos: ")
+            this.setSegundos(readln())
+        }
+
     }
 
 }
 
 fun main() {
-    val hora1 = Tiempo(1)
-    print("Introduce la hora: ")
-    hora1.setHora(readln().toInt())
-    print("Introduce los minutos: ")
-    hora1.setMinutos(readln().toInt())
-    print("Introduce los segundos: ")
-    hora1.setSegundos(readln().toInt())
+        val hora1 = Tiempo(1)
+        print("Introduce la hora: ")
+        hora1.setHora(readln())
+        print("Introduce los minutos: ")
+        hora1.setMinutos(readln())
+        print("Introduce los segundos: ")
+        hora1.setSegundos(readln())
 
-    println(hora1.toString())
+        println(hora1.toString())
 
-    val hora2 = Tiempo(1,2)
-    println(hora2.toString())
+        val hora2 = Tiempo(1,2)
+        println(hora2.toString())
 
-    val hora3 = Tiempo(1,2,3)
-    println(hora3.toString())
-
+        val hora3 = Tiempo(1,2,3)
+        println(hora3.toString())
 }

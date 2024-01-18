@@ -6,7 +6,7 @@ class Coche {
     private var puertas:Int = 0
     private var matricula:String = ""
 
-    fun getColor():String {
+    private fun getColor():String {
         return this.color.uppercase()
     }
 
@@ -14,45 +14,50 @@ class Coche {
         if (color.isNotEmpty()) this.color = color
     }
 
-    fun getMarca() = this.marca.uppercase()
+    private fun getMarca() = this.marca.uppercase()
 
     fun setMarca(marca:String) {
         if (marca.isNotEmpty()) this.marca = marca
     }
 
-    fun getModelo() = this.modelo.uppercase()
+    private fun getModelo() = this.modelo.uppercase()
 
     fun setModelo(modelo:String) {
         if (modelo.isNotEmpty()) this.modelo = modelo
     }
 
-    fun getCaballos() = this.caballos
+    private fun getCaballos() = this.caballos
 
-    fun setCaballos(caballos:Int) {
-        if (caballos !in 70..700) {
-            println("Los caballos deben ser mayor a 70 y menor a 700.")
+    fun setCaballos(caballos:String) {
+        try {
+            if (caballos.toInt() !in 70..700) {
+                println("Los caballos deben ser mayor a 70 y menor a 700.")
+                print("Introduce los caballos del coche: ")
+                this.setCaballos(readln())
+            }
+            else this.caballos = caballos.toInt()
+        } catch (e:Exception) {
+            println("Los caballos introducidos no son válidos.")
             print("Introduce los caballos del coche: ")
-            this.setCaballos(readln().toInt())
+            this.setCaballos(readln())
         }
-        else this.caballos = caballos
+
     }
 
-    fun getPuertas() = this.puertas
+    private fun getPuertas() = this.puertas
 
-    fun setPuertas(puertas:Int) {
-
+    fun setPuertas(puertas:String) {
         try {
-            require(puertas in 3..5) {"Las puertas no puede ser inferior a 3 ni mayor a 5."}
+            require(puertas.toInt() in 3..5) {"Las puertas no puede ser inferior a 3 ni mayor a 5."}
+            this.puertas = puertas.toInt()
         } catch (e: Exception) {
             println("Las puertas no puede ser inferior a 3 ni mayor a 5.")
             print("Introduce las puertas del coche: ")
-            this.setPuertas(readln().toInt())
+            this.setPuertas(readln())
         }
-
-        this.puertas = puertas
     }
 
-    fun getMatricula() = this.matricula.uppercase()
+    private fun getMatricula() = this.matricula.uppercase()
 
     fun setMatricula(matricula:String) {
         if (matricula.isNotEmpty()) this.matricula = matricula
@@ -66,19 +71,25 @@ class Coche {
 fun main() {
     val coche1 = Coche()
 
-    print("Introduce el color del coche: ")
-    coche1.setColor(readln())
-    print("Introduce la marca del coche: ")
-    coche1.setMarca(readln())
-    print("Introduce el modelo del coche: ")
-    coche1.setModelo(readln())
-    print("Introduce los caballos del coche: ")
-    coche1.setCaballos(readln().toInt())
-    print("Introduce las puertas del coche: ")
-    coche1.setPuertas(readln().toInt())
-    print("Introduce la matrícula del coche: ")
-    coche1.setMatricula(readln())
+    try {
+        print("Introduce el color del coche: ")
+        coche1.setColor(readln())
+        print("Introduce la marca del coche: ")
+        coche1.setMarca(readln())
+        print("Introduce el modelo del coche: ")
+        coche1.setModelo(readln())
+        print("Introduce los caballos del coche: ")
+        coche1.setCaballos(readln())
+        print("Introduce las puertas del coche: ")
+        coche1.setPuertas(readln())
+        print("Introduce la matrícula del coche: ")
+        coche1.setMatricula(readln())
 
-    println(coche1.toString())
+        println(coche1.toString())
+
+    } catch (e: Exception) {
+        println("")
+    }
+
 
 }
