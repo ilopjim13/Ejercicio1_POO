@@ -5,6 +5,7 @@ class Coche {
     private var caballos:Int = 0
     private var puertas:Int = 0
     private var matricula:String = ""
+
     fun getColor():String {
         return this.color.uppercase()
     }

@@ -1,4 +1,20 @@
-class Rectangulo(private val base:Double, private val altura:Double) {
+import java.lang.IllegalArgumentException
+
+class Rectangulo(base:Double, altura:Double) {
+    private var base:Double = 0.0
+        set(value) {
+            require(value>=0) { "La base no puede ser 0" }
+            field = value
+        }
+    private var altura:Double = 0.0
+        set(value) {
+            require(value>=0) { "La altura no puede ser 0" }
+            field = value
+        }
+    init {
+        this.base = base
+        this.altura = altura
+    }
 
     private fun area(): Double {
         return this.base * this.altura
@@ -14,19 +30,24 @@ class Rectangulo(private val base:Double, private val altura:Double) {
 }
 
 fun main() {
-    val rect1 = Rectangulo(3.7,5.4)
-    println("Rectangulo 1:")
-    println(rect1.toString())
+    try {
+        val rect1 = Rectangulo(3.7,5.4)
+        println("Rectangulo 1:")
+        println(rect1.toString())
 
-    val rect2 = Rectangulo(4.2,3.8)
-    println("\nRectangulo 2:")
-    println(rect2.toString())
+        val rect2 = Rectangulo(4.2,3.8)
+        println("\nRectangulo 2:")
+        println(rect2.toString())
 
-    val rect3 = Rectangulo(6.9,13.2)
-    println("\nRectangulo 3:")
-    println(rect3.toString())
+        val rect3 = Rectangulo(6.9,13.2)
+        println("\nRectangulo 3:")
+        println(rect3.toString())
 
-    val rect4 = Rectangulo(9.45,4.98)
-    println("\nRectangulo 4:")
-    println(rect4.toString())
+        val rect4 = Rectangulo(9.45,4.98)
+        println("\nRectangulo 4:")
+        println(rect4.toString())
+    } catch (e: IllegalArgumentException) {
+        println(e.message)
+    }
+
 }
