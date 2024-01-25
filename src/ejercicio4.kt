@@ -1,4 +1,4 @@
-class Coche {
+class Coche(color:String, marca: String, modelo: String, caballos: Int, puertas: Int, matricula: String) {
     private var color:String = ""
     private var marca:String = ""
     private var modelo: String = ""
@@ -11,7 +11,7 @@ class Coche {
     }
 
     fun setColor(color:String) {
-        if (color.isNotEmpty()) this.color = color
+        if (color.isNotEmpty() && color.isNotBlank()) this.color = color
     }
 
     fun getMarca() = this.marca.uppercase()
@@ -64,7 +64,7 @@ class Coche {
 }
 
 fun main() {
-    val coche1 = Coche()
+    val coche1 = Coche("","","",300,3,"")
 
     print("Introduce el color del coche: ")
     coche1.setColor(readln())
