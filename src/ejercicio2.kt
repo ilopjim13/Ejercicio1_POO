@@ -21,6 +21,16 @@ class Personas(val peso: Double, val altura: Double) {
          return this.peso / (this.altura * this.altura)
     }
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Personas) return false
+
+        if (this.nombre != other.nombre) return false
+        if (this.altura != other.altura) return false
+        if (this.peso != other.peso) return false
+        return true
+     }
+
     fun mostrarDesc() {
         println("${this.nombre} con una altura de ${this.altura}m y un peso de ${this.peso}Kg tiene un IMC de ${String.format("%.2f",this.imc)} (${obtenerImcDesc()})")
     }
